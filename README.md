@@ -15,10 +15,10 @@
 - bloc_pattern:
 - rxdart:
 
-This application intends to implement various flutter features that are commonly used when developing store-like application
+This application intends to implement various flutter features that are commonly used when developing store-like applications.
 
 ### E-commerce App Final UI
 
-![demo](promo-video/mobizen.mp4)
+![demo](promo-video/mobizen.gif)
 
 
