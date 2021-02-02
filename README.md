@@ -1,16 +1,24 @@
-# mystore
+# E-commerce App - Flutter UI
 
-A new Flutter project.
+**Important packages being used:**
 
-## Getting Started
+- flutter_svg:
+- firebase_core: ^0.5.3
+- cloud_firestore:
+- firebase_auth: ^0.18.4+1
+- google_sign_in : ^4.0.7
+- provider: ^4.3.2+2
+- flutter_masked_text: ^0.8.0
+- Geolocator:
+- google_maps_flutter:
+- flutter_cielo: 1.0.6
+- bloc_pattern:
+- rxdart:
 
-This project is a starting point for a Flutter application.
+This application intends to implement various flutter features that are commonly used when developing store-like application
 
-A few resources to get you started if this is your first Flutter project:
+### E-commerce App Final UI
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![demo](promo-video/mobizen.mp4)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
