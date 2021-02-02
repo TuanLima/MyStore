@@ -1,0 +1,2 @@
+
+# verify R8 and ProGuard tools for removing unused code

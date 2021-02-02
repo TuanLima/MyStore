@@ -1,0 +1,84 @@
+name: mystore
+description: A new Flutter project.
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.1
+
+
+  firebase_core: ^0.5.3
+  firebase_auth: ^0.18.4+1
+  google_sign_in : ^4.0.7
+  provider: ^4.3.2+2
+  font_awesome_flutter:
+  flutter_masked_text: ^0.8.0
+
+  google_fonts: ^1.1.1
+  flutter_svg: ^0.19.2+1
+  cloud_firestore:
+
+  #remove functionality
+  geolocator:
+  google_maps_flutter:
+  flutter_cielo: 1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  bloc_pattern:
+  rxdart:
+
+flutter:
+  uses-material-design: true
+
+
+  assets:
+    # - assets/1.png
+    # - assets/google.png
+    # - assets/moto.png
+    # - assets/map.png
+    # - assets/foodtukk.png
+    # - assets/foodtukk1.png
+    - assets/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
