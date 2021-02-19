@@ -10,7 +10,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 0.0),
         child: Column(

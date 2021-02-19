@@ -12,7 +12,7 @@ const List<PromoItem> promoItemList = [
   PromoItem(
       title: "",
       url:
-          "https://www.chocolatesbrasilcacau.com.br/assets/site/img/about/fabrica.jpg"),
+          "https://acontecendoaqui.com.br/sites/default/files/brasil_cacau.jpg"),
   PromoItem(
       title: "",
       url:

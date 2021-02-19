@@ -20,7 +20,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
     CrudMethods crudObj = new CrudMethods();
 
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.grey.shade100,
       body: Builder(
         builder: (context) => SingleChildScrollView(

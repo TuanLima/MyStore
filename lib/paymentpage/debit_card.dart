@@ -306,7 +306,7 @@ class _CreditCardPageState extends State<CreditCardPage> {
   Widget build(BuildContext context) {
     _context = context;
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      //resizeToAvoidBottomPadding: true,
       body: bodyData(),
       floatingActionButton: floatingBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

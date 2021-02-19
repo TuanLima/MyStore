@@ -27,7 +27,6 @@ class _FirstPageState extends State<FirstPage> {
     try {
       _stateStream = FirebaseAuth.instance.authStateChanges();
       _stateStream.listen((event) {
-        print('_stateStreamEvent. first: ${_stateStream.first}');
         print(event);
       });
     } catch (e) {

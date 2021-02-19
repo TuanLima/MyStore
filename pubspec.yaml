@@ -24,17 +24,27 @@ dependencies:
   google_fonts: ^1.1.1
   flutter_svg: ^0.19.2+1
   cloud_firestore:
+  json_annotation: ^3.1.1
+  shared_preferences: ^0.5.12+4
 
   #remove functionality
   geolocator:
   google_maps_flutter:
   flutter_cielo: 1.0.6
 
+  #image_picker: ^0.6.7+22
+  firebase_storage: ^5.2.0
+  path_provider: ^1.6.27
+  http: ^0.12.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
+  build_runner: ^1.11.1
+  json_serializable: ^3.5.1
 
   bloc_pattern:
   rxdart:

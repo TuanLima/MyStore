@@ -1,26 +1,106 @@
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:mystore/data/data_manager.dart';
+// import 'package:mystore/model/fooditem.dart';
+//
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp(
+//       options: const FirebaseOptions(
+//     apiKey: 'AIzaSyABRHtE5xWrN2mfQXYFgWUgP9Hruu2sCpM',
+//     appId: '1:638366587678:android:f4a844e1a21c613f2dc70f',
+//     messagingSenderId: '638366587678',
+//     projectId: '638366587678',
+//   ));
+//
+//   runApp(FoodItemListWidget());
+// }
+//
+// class FoodItemListWidget extends StatelessWidget {
+//   const FoodItemListWidget({Key key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//         theme: ThemeData.dark(),
+//         title: 'Firebase Task Manager',
+//         home: Scaffold(
+//           body: MyWidget(),
+//         ));
+//   }
+// }
+//
+// class MyWidget extends StatefulWidget {
+//   MyWidget({Key key}) : super(key: key);
+//
+//   @override
+//   _MyWidgetState createState() => _MyWidgetState();
+// }
+//
+// class _MyWidgetState extends State<MyWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final DataManager dm = DataManager();
+//
+//     return Scaffold(
+//       body: FutureBuilder(
+//         future: dm.getList(),
+//         builder: (context, foodItemList) {
+//           String text = 'A problem ocurred';
+//           print(foodItemList.data);
+//           if(foodItemList.connectionState == ConnectionState.done){
+//             if(foodItemList != null) {
+//               if (foodItemList.data.foodItems.isNotEmpty) {
+//                 text = foodItemList.data.foodItems[0].description;
+//               }
+//             }
+//           } else {
+//             return CircularProgressIndicator(backgroundColor: Colors.white,);
+//           }
+//           return Center(child: Text(text));
+//         },
+//       ),
+//     );
+//   }
+// }
+
+import 'dart:core';
+
+import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mystore/Restaurant/resthome.dart';
 import 'package:mystore/Restaurant/rlogin.dart';
 import 'package:mystore/Restaurant/rsignup.dart';
+import 'package:mystore/data/image_handler.dart';
 import 'package:mystore/firstpage.dart';
 import 'package:mystore/screens/details/details_screen.dart';
-import './loginpage/sigin_page.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import './bloc/cartListBloc.dart';
-import 'package:bloc_pattern/bloc_pattern.dart';
-import './model/fooditem.dart';
-import './const/themeColor.dart';
 import './bloc/listTileColorBloc.dart';
 import './cart.dart';
+import './const/themeColor.dart';
+import './loginpage/sigin_page.dart';
 import './loginpage/signup_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
+import './model/fooditem.dart';
 import 'data/promo_items.dart';
 
-void main() {
+void main() async {
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+    apiKey: 'AIzaSyBBcDZKNfK_zcrw4C-CgWc33G-Z7jV4Mi8',
+    appId: '1:367285067500:android:11a6df708ed9246b104fc9',
+    messagingSenderId: '367285067500',
+    projectId: '367285067500',
+  ));
   runApp(MyApp());
 }
 
@@ -35,7 +115,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           title: "MyStore",
-          home: FirstPage(),
+          home: Home(),
           debugShowCheckedModeBanner: false,
           routes: <String, WidgetBuilder>{
             '/landingpage': (BuildContext context) => new MyApp(),
@@ -67,7 +147,7 @@ class _HomeState extends State<Home> {
         title: searchBar(),
         actionsIconTheme: IconThemeData(color: Colors.black),
         iconTheme: IconThemeData(color: Colors.black),
-        actions: <Widget>[shoppingCartIcon()],
+        actions: <Widget>[shoppingCartIcon(context)],
         titleSpacing: 5,
         leadingWidth: 40,
         backgroundColor: Themes.darkBrown,
@@ -138,7 +218,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget shoppingCartIcon() {
+  Widget shoppingCartIcon(BuildContext context) {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
     return Stack(children: [
       IconButton(
@@ -234,14 +314,14 @@ class ItemContainer extends StatelessWidget {
                     )));
       },
       child: Items(
-        id: foodItem.id,
-        description: foodItem.description,
-        itemName: foodItem.title,
-        itemPrice: foodItem.price,
-        imgUrl: foodItem.imgUrl,
-        weight: foodItem.weight,
-        leftAligned: (foodItem.id % 2) == 0 ? true : false,
-      ),
+          id: foodItem.id,
+          description: foodItem.description,
+          itemName: foodItem.title,
+          itemPrice: foodItem.price,
+          imgUrl: foodItem.imgUrl,
+          weight: foodItem.weight,
+          leftAligned: (foodItem.id % 2) == 0 ? true : false,
+          path: foodItem.path),
     ));
   }
 }
@@ -398,15 +478,15 @@ Widget categories() {
 }
 
 class Items extends StatefulWidget {
-  Items({
-    @required this.id,
-    @required this.leftAligned,
-    @required this.imgUrl,
-    @required this.itemName,
-    @required this.itemPrice,
-    @required this.description,
-    @required this.weight,
-  });
+  Items(
+      {@required this.id,
+      @required this.leftAligned,
+      @required this.imgUrl,
+      @required this.itemName,
+      @required this.itemPrice,
+      @required this.description,
+      @required this.weight,
+      @required this.path});
 
   final int id;
   final bool leftAligned;
@@ -415,6 +495,7 @@ class Items extends StatefulWidget {
   final double itemPrice;
   final double weight;
   final String description;
+  final String path;
 
   @override
   _ItemsState createState() => _ItemsState();
@@ -423,6 +504,7 @@ class Items extends StatefulWidget {
 class _ItemsState extends State<Items> {
   @override
   Widget build(BuildContext context) {
+    ImageHandler ih = ImageHandler();
     double containerPadding = 45;
     double installments = 6;
 
@@ -436,14 +518,23 @@ class _ItemsState extends State<Items> {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             height: 180, //280,
             child: ClipRRect(
-              child: Hero(
-                tag: "${widget.id}",
-                child: Image.network(
-                  widget.imgUrl,
+                child: FutureBuilder<Image>(
+                    future: ih.pickImage(widget.imgUrl, widget.path),
+                    builder: (ctx, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return snapshot.data;
+                        //   Hero(
+                        //   tag: "${widget.id}",
+                        //   child: snapshot.data,
+                        //   //Image.network(widget.imgUrl,),
+                        // );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    })
+
+                // ),
                 ),
-              ),
-              // ),
-            ),
           ),
           //Divider(thickness: 1.0, color: Themes.darkBrown),
           Padding(
