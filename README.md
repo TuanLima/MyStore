@@ -19,6 +19,6 @@ This application intends to implement various flutter features that are commonly
 
 ### E-commerce App Final UI
 
-![demo](promo-video/mobizen.gif)
+![demo](promo-video/mobizen.gif | height=200)
 
 
